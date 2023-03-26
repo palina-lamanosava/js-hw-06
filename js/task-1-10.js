@@ -125,7 +125,12 @@ console.log(getInactiveUsers(users));
 // Task 5
 // Получить пользоваля (не массив) по email (поле email, он уникальный).
 
-const getUserWithEmail = (users, email) => users.find(user=> user.email===email);
+const getUserWithEmail = (users, email) => {
+  const isUserExist = users.find(user => user.email === email);
+  if (!isUserExist) {
+    return ('User not found');
+  } return isUserExist;
+}
     
 
 console.log(getUserWithEmail(users, 'shereeanthony@kog.com'));
@@ -133,14 +138,19 @@ console.log(getUserWithEmail(users, 'shereeanthony@kog.com'));
 console.log(getUserWithEmail(users, 'elmahead@omatom.com'));
 
 
+console.log(getUserWithEmail(users, 'ddd'));
+
 // Task 6
 // Получить массив пользователей попадающих в возрастную категорию от min до max лет (поле age).
 
-const getUsersWithAge = (users, min, max) => users.filter(user => user.age >= min && user.age <= max);
+const getUsersWithAge = (users, options) => {
+  const { min, max } = options;
+  return users.filter(user => user.age >= min && user.age <= max);
+} 
 
-console.log(getUsersWithAge(users, 20, 30)); // [объект Ross Vazquez, объект Elma Head, объект Carey Barr]
+console.log(getUsersWithAge(users, {min:20, max:30})); // [объект Ross Vazquez, объект Elma Head, объект Carey Barr]
 
-console.log(getUsersWithAge(users, 30, 40));
+console.log(getUsersWithAge(users, {min:30, max:40}));
 // [объект Moore Hensley, объект Sharlene Bush, объект Blackburn Dotson, объект Sheree Anthony]
 
 
